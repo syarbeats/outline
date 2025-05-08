@@ -26,7 +26,91 @@ If you have questions or improvements for the docs please create a thread in [Gi
 
 # Development
 
-There is a short guide for [setting up a development environment](https://docs.getoutline.com/s/hosting/doc/local-development-5hEhFRXow7) if you wish to contribute changes, fixes, and improvements to Outline.
+## Prerequisites
+
+Before running Outline locally, ensure you have the following installed:
+
+- Node.js (version 18-20)
+- PostgreSQL
+- Redis
+- Yarn package manager
+
+## Local Development Setup
+
+1. Clone the repository and install dependencies:
+```shell
+git clone https://github.com/outline/outline.git
+cd outline
+yarn install
+```
+
+2. Configure environment variables:
+```shell
+cp .env.sample .env
+```
+Edit the `.env` file with your local configuration.
+
+3. Start the required services using Docker:
+```shell
+docker-compose up -d
+```
+This will start PostgreSQL and Redis services.
+
+4. Initialize the database:
+```shell
+yarn db:create
+yarn db:migrate
+```
+
+## Running the Application
+
+### Development Mode
+
+You can run the frontend and backend separately for development:
+
+1. Start the frontend development server:
+```shell
+yarn vite:dev
+```
+This will start the Vite development server for the frontend.
+
+2. In a separate terminal, start the backend server:
+```shell
+yarn dev:backend
+```
+This runs the backend server with hot-reload enabled.
+
+Alternatively, run both frontend and backend together:
+```shell
+yarn dev:watch
+```
+
+### Production Mode
+
+To run the application in production mode:
+
+1. Build the application:
+```shell
+yarn build
+```
+
+2. Start the server:
+```shell
+yarn start
+```
+
+## Available Scripts
+
+- `yarn dev:watch` - Run both frontend and backend in development mode
+- `yarn vite:dev` - Run frontend development server
+- `yarn dev:backend` - Run backend with hot-reload
+- `yarn db:migrate` - Run database migrations
+- `yarn db:create` - Create database
+- `yarn db:reset` - Reset database (drops and recreates)
+- `yarn build` - Build for production
+- `yarn start` - Start production server
+
+There is also a detailed guide for [setting up a development environment](https://docs.getoutline.com/s/hosting/doc/local-development-5hEhFRXow7) if you need additional information.
 
 ## Contributing
 
